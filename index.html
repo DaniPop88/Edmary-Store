@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edmary Evangelista Daily Store | Beauty & Skincare Quezon City</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Edmary Evangelista Daily Store – Trusted cosmetics and skincare retailer in Quezon City. Shop genuine products, enjoy friendly service, and experience affordable beauty daily.">
+    <link rel="icon" type="image/png" href="image/FAVICON.png">
+    <style>
+        :root {
+            --primary: #7a1fa2; /* Deep purple */
+            --accent: #ff69b4; /* Hot pink */
+            --bright: #ffd600; /* Yellow for 'STORE' */
+            --light-bg: #fff8f5;
+            --header-bg: #f9e5ff;
+            --footer-bg: #ffe4ec;
+            --white: #fff;
+            --shadow: rgba(225,180,220,0.09);
+            --border: #ffd6e0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: var(--light-bg);
+            color: #333;
+            line-height: 1.7;
+        }
+        /* Sticky Header */
+        header {
+            background: var(--header-bg);
+            padding: 32px 0 12px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--border);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .logo-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .logo-img {
+            width: 165px;
+            max-width: 95vw;
+            height: auto;
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 4px 16px var(--shadow);
+            margin-bottom: 4px;
+        }
+        .logo-caption {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 2.1rem;
+            letter-spacing: 2.5px;
+        }
+        .logo-subcaption {
+            color: var(--accent);
+            font-size: 1.1rem;
+            letter-spacing: 1.2px;
+            margin-top: 2px;
+        }
+        nav {
+            margin: 22px 0 0 0;
+        }
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            margin: 0 22px;
+            transition: color .2s;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid transparent;
+            padding: 3px 0;
+            display: inline-block;
+        }
+        nav a:hover, nav a.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            background: var(--white);
+        }
+        .nav-menu {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        /* Burger Button */
+        .burger {
+            display: none;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            position: absolute;
+            right: 18px;
+            top: 24px;
+            z-index: 1100;
+        }
+        .burger span,
+        .burger span::before,
+        .burger span::after {
+            display: block;
+            background: var(--primary);
+            height: 5px;
+            width: 28px;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        .burger span::before,
+        .burger span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+        .burger span::before {
+            top: -9px;
+        }
+        .burger span::after {
+            top: 9px;
+        }
+        .burger.open span {
+            background: transparent;
+        }
+        .burger.open span::before {
+            transform: rotate(45deg) translate(5px,5px);
+        }
+        .burger.open span::after {
+            transform: rotate(-45deg) translate(5px,-5px);
+        }
+        /* Floating Cart Button */
+        .cart-floating-btn {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 1900;
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            color: #fff;
+            border: none;
+            box-shadow: 0 2px 8px var(--shadow);
+            border-radius: 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 16px 28px;
+            transition: background .2s, box-shadow .2s;
+        }
+        .cart-floating-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+            box-shadow: 0 6px 16px var(--shadow);
+        }
+        .cart-badge {
+            display: inline-block;
+            margin-left: 10px;
+            background: var(--bright);
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 4px 11px;
+            vertical-align: middle;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        @media (max-width: 900px) {
+            .cart-floating-btn {
+                right: 18px;
+                bottom: 18px;
+                padding: 13px 20px;
+                font-size: 1.08rem;
+            }
+        }
+        @media (max-width: 500px) {
+            .cart-floating-btn {
+                right: 7px;
+                bottom: 7px;
+                padding: 11px 14px;
+                font-size: 0.98rem;
+            }
+        }
+        /* Cart Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: rgba(122, 31, 162, 0.14);
+        }
+        .modal-content {
+            background: var(--white);
+            margin: 70px auto;
+            padding: 26px 24px 24px 24px;
+            border: 2px solid var(--border);
+            border-radius: 18px;
+            max-width: 370px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(122,31,162,0.15);
+            position: relative;
+            animation: fadein .3s;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .close-modal {
+            color: var(--primary);
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+        .modal-cart-title {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.16rem;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+        .modal-cart-list {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+        .modal-cart-list li {
+            font-size: 0.97rem;
+            margin-bottom: 7px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-cart-list .remove-item-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 12px;
+            transition: background .2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-cart-list .remove-item-btn:hover {
+            background: var(--primary);
+        }
+        .modal-cart-total {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.09rem;
+            text-align: left;
+        }
+        .modal-checkout-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 10px 32px;
+            border-radius: 26px;
+            font-size: 1.03rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background .2s;
+            margin-top: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-checkout-btn:hover {
+            background: var(--primary);
+        }
+        /* Responsive Nav */
+        @media (max-width: 900px) {
+            .nav-menu {
+                flex-direction: column;
+                background: var(--header-bg);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 24px var(--shadow);
+                display: none;
+                z-index: 1050;
+                border-bottom: 2px solid var(--border);
+            }
+            .nav-menu.show {
+                display: flex;
+            }
+            nav a {
+                margin: 12px 0;
+                font-size: 1.07rem;
+                padding: 8px 0;
+                border-bottom: none;
+            }
+            .burger {
+                display: flex;
+            }
+            nav {
+                margin: 0;
+                position: relative;
+            }
+        }
+        @media (max-width: 1100px) {
+            main {
+                padding: 20px 8px 24px 8px;
+            }
+            .products-list {
+                gap: 18px;
+            }
+        }
+        @media (max-width: 900px) {
+            .products-list {
+                flex-direction: column;
+                gap: 18px;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+            }
+            .products {
+                text-align: center;
+            }
+        }
+        @media (max-width: 600px) {
+            header {
+                padding: 18px 0 10px 0;
+            }
+            .logo-img {
+                width: 120px;
+            }
+            .section-title {
+                font-size: 1.24rem;
+            }
+        }
+        main {
+            max-width: 1100px;
+            margin: 32px auto;
+            background: var(--white);
+            box-shadow: 0 2px 16px var(--shadow);
+            border-radius: 18px;
+            padding: 36px 36px 48px 36px;
+        }
+        section {
+            margin-bottom: 42px;
+        }
+        .section-title {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 18px;
+            font-weight: 800;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 7px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 24px;
+            font-size: 1.15rem;
+        }
+        .about ul, .products ul, .faq ul, .delivery ul, .testimonials ul {
+            margin: 12px 0 0 22px;
+        }
+        .about li, .products li, .faq li, .delivery li, .testimonials li {
+            margin-bottom: 10px;
+        }
+        .products-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 18px;
+            margin-bottom: 10px;
+        }
+        .product-card {
+            background: var(--light-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            width: calc(33.333% - 18px);
+            min-width: 260px;
+            max-width: 320px;
+            box-shadow: 0 2px 10px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 22px 16px 20px 16px;
+            position: relative;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: var(--accent) url('https://via.placeholder.com/100x100.png?text=Product') center center no-repeat;
+            background-size: contain;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 6px var(--shadow);
+        }
+        .product-title {
+            font-weight: 700;
+            font-size: 1.07rem;
+            color: var(--primary);
+            margin-bottom: 7px;
+            text-align: center;
+        }
+        .product-desc {
+            font-size: 0.99rem;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #333;
+        }
+        .product-info {
+            font-size: 0.97rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        .product-price {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 11px;
+            font-size: 1.08rem;
+        }
+        .add-cart-btn {
+            background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+            color: #fff;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 22px;
+            font-size: 1.04rem;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: background .2s;
+            margin-top: 5px;
+        }
+        .add-cart-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        .contact-info {
+            line-height: 1.9;
+        }
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        .testimonials blockquote {
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        footer {
+            background: var(--footer-bg);
+            padding: 32px 0 20px 0;
+            text-align: center;
+            color: var(--primary);
+            border-top: 3px solid var(--border);
+            font-size: 1.02rem;
+        }
+        .footer-links {
+            margin-bottom: 16px;
+        }
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 16px;
+            font-weight: 600;
+            transition: color .2s;
+        }
+        .footer-links a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        .business-details {
+            margin-top: 10px;
+            font-size: 0.97rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+    </style>
+    <script>
+        // Cart Logic with Remove
+        let cart = [];
+        function addToCart(productIndex) {
+            const products = [
+                { name: "Korean Glow Moisturizer", price: 30.99 },
+                { name: "Ever Bilena Lip Tint", price: 99.00 },
+                { name: "COSRX Pimple Patch", price: 120.50 }
+            ];
+            const prod = products[productIndex];
+            const existing = cart.find(item => item.name === prod.name);
+            if (existing) { existing.qty++; }
+            else { cart.push({ name: prod.name, price: prod.price, qty: 1 }); }
+            renderCartBadge();
+            renderCartModal();
+        }
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            renderCartBadge();
+            renderCartModal();
+        }
+        function renderCartBadge() {
+            var badge = document.getElementById('cart-badge');
+            var count = cart.reduce((acc, item) => acc + item.qty, 0);
+            badge.textContent = count;
+        }
+        function renderCartModal() {
+            let cartList = document.getElementById('modal-cart-list');
+            let cartTotal = document.getElementById('modal-cart-total');
+            let cartItemsHTML = '';
+            let total = 0;
+            cart.forEach((item, i) => {
+                cartItemsHTML += `<li>
+                    <span>${item.name} x ${item.qty} – ₱${(item.price * item.qty).toFixed(2)}</span>
+                    <button class="remove-item-btn" title="Hapus" onclick="removeCartItem(${i})">&times;</button>
+                </li>`;
+                total += item.price * item.qty;
+            });
+            cartList.innerHTML = cartItemsHTML || '<li>Your cart is empty.</li>';
+            cartTotal.innerText = 'Total: ₱' + total.toFixed(2);
+        }
+        function openCartModal() {
+            renderCartModal();
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+        function closeCartModal() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+        function checkoutModal() {
+            window.location.href = "order-summary.html";
+        }
+        window.onload = function() {
+            renderCartBadge();
+            renderCartModal();
+        };
+
+        // Burger menu logic
+        document.addEventListener('DOMContentLoaded', function() {
+            var burger = document.querySelector('.burger');
+            var navMenu = document.querySelector('.nav-menu');
+            if (burger && navMenu) {
+                burger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    burger.classList.toggle('open');
+                    navMenu.classList.toggle('show');
+                });
+                document.body.addEventListener('click', function(e) {
+                    if (!navMenu.contains(e.target) && !burger.contains(e.target) && navMenu.classList.contains('show')) {
+                        navMenu.classList.remove('show');
+                        burger.classList.remove('open');
+                    }
+                });
+            }
+            var modal = document.getElementById('cart-modal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeCartModal();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-box">
+            <img class="logo-img" src="image/LOGO.png" alt="Edmary Evangelista Daily Store Logo">
+            <div class="logo-caption">EDMARY</div>
+            <div class="logo-subcaption">EVANGELISTA DAILY STORE</div>
+        </div>
+        <!-- Burger Button for Mobile -->
+        <button class="burger" aria-label="Menu" title="Menu">
+            <span></span>
+        </button>
+        <nav>
+            <div class="nav-menu">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+                <a href="#delivery">Delivery</a>
+                <a href="#testimonials">Testimonials</a>
+            </div>
+        </nav>
+    </header>
+    <!-- Floating Cart Button -->
+    <button class="cart-floating-btn" onclick="openCartModal()" title="Your Cart">
+        🛒
+        <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+    <!-- Cart Modal Popup -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCartModal()" aria-label="Tutup">&times;</button>
+            <div class="modal-cart-title">🛒 Your Cart </div>
+            <ul class="modal-cart-list" id="modal-cart-list"></ul>
+            <div class="modal-cart-total" id="modal-cart-total"></div>
+            <button class="modal-checkout-btn" onclick="checkoutModal()">Checkout</button>
+        </div>
+    </div>
+    <main>
+        <!-- Home Section -->
+        <section id="home">
+            <h1 class="section-title">Welcome to Edmary Evangelista Daily Store</h1>
+            <div class="subtitle">Your Trusted Beauty & Skincare Companion in Quezon City</div>
+            <p>
+                At Edmary Evangelista Daily Store, we believe in daily confidence through self-care. Whether you’re looking for everyday skincare essentials or a touch of glam for special occasions, our curated selection of trusted local and international brands is here for you.
+            </p>
+            <p>
+                Located in the heart of Barangay Holy Spirit, Quezon City, we proudly serve our community with affordable, high-quality cosmetics and personal care products. Every visit is a step toward self-love.<br>
+                <b style="color:var(--accent);">Mura. Maganda. Mapagkakatiwalaan.</b><br>
+                Come visit us today or shop online — para sa iyong daily glow!
+            </p>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="about">
+            <h2 class="section-title">About Us</h2>
+            <p>
+                Founded with a passion for beauty and wellness, Edmary Evangelista Daily Store started as a small family-run beauty kiosk in Quezon City. Today, we continue to grow as a trusted neighborhood shop serving customers with sincerity, quality, and care.
+            </p>
+            <p>
+                Our mission is simple: make quality beauty products accessible to every Filipino. We believe that confidence starts with good self-care, and we want to be part of your daily beauty ritual.
+            </p>
+            <ul>
+                <li>Genuine, handpicked products</li>
+                <li>Friendly neighborhood service</li>
+                <li>Trusted by locals for everyday essentials</li>
+                <li>Affordably priced without compromising quality</li>
+            </ul>
+            <p>
+                Mula noon hanggang ngayon, we remain committed to helping you feel good, look great, and shine daily.
+            </p>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products" id="products">
+            <h2 class="section-title">Our Products</h2>
+            <div class="subtitle">Shop a wide variety of cosmetics & skincare for your daily glow.</div>
+            <div class="products-list">
+                <!-- Product Cards -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-title">Korean Glow Moisturizer</div>
+                    <div class="product-desc">Hydrating, lightweight, and suitable for sensitive skin.</div>
+                    <div class="product-info">Qty: 8</div>
+                    <div class="product-price">₱30.99</div>
+                    <button class="add-cart-btn" onclick="addToCart(0)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-title">Ever Bilena Lip Tint</div>
+                    <div class="product-desc">Long-lasting color, non-drying, perfect for everyday wear.</div>
+                    <div class="product-info">Qty: 15</div>
+                    <div class="product-price">₱99.00</div>
+                    <button class="add-cart-btn" onclick="addToCart(1)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-title">COSRX Pimple Patch</div>
+                    <div class="product-desc">Fast healing, invisible cover, trusted by local beauty gurus.</div>
+                    <div class="product-info">Qty: 6</div>
+                    <div class="product-price">₱120.50</div>
+                    <button class="add-cart-btn" onclick="addToCart(2)">Add to Cart</button>
+                </div>
+            </div>
+            <ul>
+                <li><b>Skincare Essentials</b>: Moisturizers, cleansers, toners, whitening creams, acne solutions</li>
+                <li><b>Makeup Must-Haves</b>: Foundation, lip tints, eyeliners, compacts, palettes</li>
+                <li><b>Body & Hair Care</b>: Scrubs, lotions, hair oils, shampoos, deodorants</li>
+                <li><b>Local Favorites</b>: Ever Bilena, Careline, BLK, Vice Cosmetics</li>
+                <li><b>Premium Imports</b>: SOME BY MI, COSRX, Innisfree, Laneige, The Ordinary</li>
+                <li><b>Additional Services</b>: Beauty consultation, pre-orders, bulk reseller orders</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <b>Store Address:</b> #105 Palmera Street, Barangay Holy Spirit, Quezon City, NCR, 1127, Philippines<br>
+                <b>Phone:</b> <a href="tel:+639457813029">+63 945 781 3029</a><br>
+                <b>Email:</b> <a href="mailto:contact@edmaryevangelistastore.com">contact@edmaryevangelistastore.com</a><br>
+                <b>Website:</b> <a href="https://www.edmaryevangelistastore.com" target="_blank">www.edmaryevangelistastore.com</a><br>
+                <b>Business Hours:</b> Monday to Saturday – 8:00 AM to 6:00 PM<br>
+                Closed on Sundays<br>
+                <b>Facebook & Instagram:</b> @edmaryevangelistastore
+            </div>
+            <p>Have a question or need a recommendation? Message us anytime – we’d love to help!</p>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <ul>
+                <li><b>Are your products authentic?</b> Yes, 100%! All items are directly sourced from official distributors and reputable suppliers. No fakes, ever.</li>
+                <li><b>Do you offer delivery?</b> Yes. We deliver within Metro Manila via Grab/Lalamove, and provincial shipping through J&T Express or LBC. Same-day delivery for nearby areas.</li>
+                <li><b>Do you accept walk-ins?</b> Yes, feel free to drop by during business hours. Our friendly staff will be happy to assist you.</li>
+                <li><b>Can I order online?</b> Yes! Message us on Facebook or email us your order. We also accept pre-orders for items not currently in stock.</li>
+                <li><b>What payment methods do you accept?</b> Gcash, bank transfer (BDO/BPI), and cash-on-delivery for select locations.</li>
+            </ul>
+        </section>
+
+        <!-- Delivery Section -->
+        <section class="delivery" id="delivery">
+            <h2 class="section-title">Shipping & Delivery</h2>
+            <ul>
+                <li><b>Metro Manila:</b> Same-day delivery via Grab/Lalamove (cutoff: 4PM)</li>
+                <li><b>Luzon, Visayas, Mindanao:</b> 1-3 business days via LBC or J&T Express</li>
+                <li><b>Payment Options:</b> Gcash, Bank Transfer, COD (Metro Manila only)</li>
+            </ul>
+            <p>
+                All parcels are securely packed and dispatched with care. You’ll receive tracking info once shipped. For urgent deliveries, contact us directly.
+            </p>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials" id="testimonials">
+            <h2 class="section-title">Testimonials</h2>
+            <ul>
+                <li>
+                    <blockquote>“Mura na, legit pa! I always buy my toner and lip tints from them. Super bait pa ng seller.”</blockquote>
+                    – Carla M., Fairview
+                </li>
+                <li>
+                    <blockquote>“Fast delivery, authentic Korean products. Nakakaganda talaga!”</blockquote>
+                    – Trisha L., Caloocan
+                </li>
+                <li>
+                    <blockquote>“Been a regular buyer for 6 months na. Never disappointed.”</blockquote>
+                    – Joy V., Novaliches
+                </li>
+                <li>
+                    <blockquote>“Perfect local store for my daily skincare needs. Highly recommend.”</blockquote>
+                    – Nina R., Quezon City
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a> |
+            <a href="terms.html">Terms of Service</a> |
+            <a href="refund-policy.html">Refund Policy</a>
+        </div>
+        <div class="business-details">
+            <b>Business Name:</b> Edmary Evangelista Daily Store<br>
+            <b>Business Type:</b> Cosmetics & Beauty Products Retail<br>
+            <b>Store Address:</b> #105 Palmera Street, Barangay Holy Spirit, Quezon City, NCR, 1127, Philippines<br>
+            <b>Phone:</b> +63 945 781 3029<br>
+            <b>Email:</b> contact@edmaryevangelistastore.com<br>
+            <b>Website:</b> www.edmaryevangelistastore.com<br>
+            <b>Operating Hours:</b> Monday to Saturday – 8:00 AM to 6:00 PM<br>
+            <b>Business Registration No.:</b> #QCY-234987654-BEAUTY<br>
+            <b>VAT Registered:</b> Yes – VAT ID #009123456789
+        </div>
+        <div style="margin-top: 16px; font-size: 0.94rem;">
+            &copy; 2025 Edmary Evangelista Daily Store. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
