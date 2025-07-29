@@ -5,12 +5,12 @@
     <title>Edmary Evangelista Daily Store | Beauty & Skincare Quezon City</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Edmary Evangelista Daily Store – Trusted cosmetics and skincare retailer in Quezon City. Shop genuine products, enjoy friendly service, and experience affordable beauty daily.">
-    <link rel="icon" type="image/png" href="image/FAVICON.png">
+    <link rel="icon" type="image/png" href="image/LOGO.png">
     <style>
         :root {
-            --primary: #7a1fa2; /* Deep purple */
-            --accent: #ff69b4; /* Hot pink */
-            --bright: #ffd600; /* Yellow for 'STORE' */
+            --primary: #7a1fa2;
+            --accent: #ff69b4;
+            --bright: #ffd600;
             --light-bg: #fff8f5;
             --header-bg: #f9e5ff;
             --footer-bg: #ffe4ec;
@@ -29,7 +29,6 @@
             color: #333;
             line-height: 1.7;
         }
-        /* Sticky Header */
         header {
             background: var(--header-bg);
             padding: 32px 0 12px 0;
@@ -96,7 +95,6 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        /* Burger Button */
         .burger {
             display: none;
             cursor: pointer;
@@ -143,7 +141,6 @@
         .burger.open span::after {
             transform: rotate(-45deg) translate(5px,-5px);
         }
-        /* Floating Cart Button */
         .cart-floating-btn {
             position: fixed;
             bottom: 32px;
@@ -195,7 +192,6 @@
                 font-size: 0.98rem;
             }
         }
-        /* Cart Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -297,7 +293,6 @@
         .modal-checkout-btn:hover {
             background: var(--primary);
         }
-        /* Responsive Nav */
         @media (max-width: 900px) {
             .nav-menu {
                 flex-direction: column;
@@ -422,6 +417,17 @@
             margin-bottom: 10px;
             border: 2px solid var(--primary);
             box-shadow: 0 0 6px var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            background: var(--white);
         }
         .product-title {
             font-weight: 700;
@@ -507,7 +513,6 @@
         }
     </style>
     <script>
-        // Cart Logic with Remove
         let cart = [];
         function addToCart(productIndex) {
             const products = [
@@ -562,7 +567,6 @@
             renderCartModal();
         };
 
-        // Burger menu logic
         document.addEventListener('DOMContentLoaded', function() {
             var burger = document.querySelector('.burger');
             var navMenu = document.querySelector('.nav-menu');
@@ -595,7 +599,6 @@
             <div class="logo-caption">EDMARY</div>
             <div class="logo-subcaption">EVANGELISTA DAILY STORE</div>
         </div>
-        <!-- Burger Button for Mobile -->
         <button class="burger" aria-label="Menu" title="Menu">
             <span></span>
         </button>
@@ -611,12 +614,10 @@
             </div>
         </nav>
     </header>
-    <!-- Floating Cart Button -->
     <button class="cart-floating-btn" onclick="openCartModal()" title="Your Cart">
         🛒
         <span class="cart-badge" id="cart-badge">0</span>
     </button>
-    <!-- Cart Modal Popup -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeCartModal()" aria-label="Tutup">&times;</button>
@@ -627,7 +628,6 @@
         </div>
     </div>
     <main>
-        <!-- Home Section -->
         <section id="home">
             <h1 class="section-title">Welcome to Edmary Evangelista Daily Store</h1>
             <div class="subtitle">Your Trusted Beauty & Skincare Companion in Quezon City</div>
@@ -640,8 +640,6 @@
                 Come visit us today or shop online — para sa iyong daily glow!
             </p>
         </section>
-
-        <!-- About Section -->
         <section class="about" id="about">
             <h2 class="section-title">About Us</h2>
             <p>
@@ -660,15 +658,14 @@
                 Mula noon hanggang ngayon, we remain committed to helping you feel good, look great, and shine daily.
             </p>
         </section>
-
-        <!-- Products Section -->
         <section class="products" id="products">
             <h2 class="section-title">Our Products</h2>
             <div class="subtitle">Shop a wide variety of cosmetics & skincare for your daily glow.</div>
             <div class="products-list">
-                <!-- Product Cards -->
                 <div class="product-card">
-                    <div class="product-image"></div>
+                    <div class="product-image">
+                        <img src="image/Pictures1.png" alt="Korean Glow Moisturizer">
+                    </div>
                     <div class="product-title">Korean Glow Moisturizer</div>
                     <div class="product-desc">Hydrating, lightweight, and suitable for sensitive skin.</div>
                     <div class="product-info">Qty: 8</div>
@@ -676,7 +673,9 @@
                     <button class="add-cart-btn" onclick="addToCart(0)">Add to Cart</button>
                 </div>
                 <div class="product-card">
-                    <div class="product-image"></div>
+                    <div class="product-image">
+                        <img src="image/Pictures2.png" alt="Ever Bilena Lip Tint">
+                    </div>
                     <div class="product-title">Ever Bilena Lip Tint</div>
                     <div class="product-desc">Long-lasting color, non-drying, perfect for everyday wear.</div>
                     <div class="product-info">Qty: 15</div>
@@ -684,7 +683,9 @@
                     <button class="add-cart-btn" onclick="addToCart(1)">Add to Cart</button>
                 </div>
                 <div class="product-card">
-                    <div class="product-image"></div>
+                    <div class="product-image">
+                        <img src="image/Pictures3.png" alt="COSRX Pimple Patch">
+                    </div>
                     <div class="product-title">COSRX Pimple Patch</div>
                     <div class="product-desc">Fast healing, invisible cover, trusted by local beauty gurus.</div>
                     <div class="product-info">Qty: 6</div>
@@ -701,8 +702,6 @@
                 <li><b>Additional Services</b>: Beauty consultation, pre-orders, bulk reseller orders</li>
             </ul>
         </section>
-
-        <!-- Contact Section -->
         <section class="contact" id="contact">
             <h2 class="section-title">Contact Us</h2>
             <div class="contact-info">
@@ -716,8 +715,6 @@
             </div>
             <p>Have a question or need a recommendation? Message us anytime – we’d love to help!</p>
         </section>
-
-        <!-- FAQ Section -->
         <section class="faq" id="faq">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <ul>
@@ -728,8 +725,6 @@
                 <li><b>What payment methods do you accept?</b> Gcash, bank transfer (BDO/BPI), and cash-on-delivery for select locations.</li>
             </ul>
         </section>
-
-        <!-- Delivery Section -->
         <section class="delivery" id="delivery">
             <h2 class="section-title">Shipping & Delivery</h2>
             <ul>
@@ -741,8 +736,6 @@
                 All parcels are securely packed and dispatched with care. You’ll receive tracking info once shipped. For urgent deliveries, contact us directly.
             </p>
         </section>
-
-        <!-- Testimonials Section -->
         <section class="testimonials" id="testimonials">
             <h2 class="section-title">Testimonials</h2>
             <ul>
