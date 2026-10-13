@@ -545,7 +545,7 @@
             cart.forEach((item, i) => {
                 cartItemsHTML += `<li>
                     <span>${item.name} x ${item.qty} – ₱${(item.price * item.qty).toFixed(2)}</span>
-                    <button class="remove-item-btn" title="Hapus" onclick="removeCartItem(${i})">&times;</button>
+                    <button class="remove-item-btn" title="Remove" onclick="removeCartItem(${i})">&times;</button>
                 </li>`;
                 total += item.price * item.qty;
             });
@@ -591,6 +591,10 @@
             });
         });
     </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="polish.css">
 </head>
 <body>
     <header>
@@ -620,7 +624,7 @@
     </button>
     <div id="cart-modal" class="modal">
         <div class="modal-content">
-            <button class="close-modal" onclick="closeCartModal()" aria-label="Tutup">&times;</button>
+            <button class="close-modal" onclick="closeCartModal()" aria-label="Close">&times;</button>
             <div class="modal-cart-title">🛒 Your Cart </div>
             <ul class="modal-cart-list" id="modal-cart-list"></ul>
             <div class="modal-cart-total" id="modal-cart-total"></div>
@@ -629,6 +633,8 @@
     </div>
     <main>
         <section id="home">
+            <div class="hero-bg"><figure class="refresh-hero-media refresh-hero-media-3"><img src="assets/hero-generated-v2.webp" alt="Illustrative Luxury lilac skincare still life" width="1536" height="1024" fetchpriority="high" decoding="async"></figure></div>
+            <div class="hero-text-panel">
             <h1 class="section-title">Welcome to Edmary Evangelista Daily Store</h1>
             <div class="subtitle">Your Trusted Beauty & Skincare Companion in Quezon City</div>
             <p>
@@ -639,7 +645,8 @@
                 <b style="color:var(--accent);">Mura. Maganda. Mapagkakatiwalaan.</b><br>
                 Come visit us today or shop online — para sa iyong daily glow!
             </p>
-        </section>
+            </div>
+</section>
         <section class="about" id="about">
             <h2 class="section-title">About Us</h2>
             <p>
@@ -707,8 +714,8 @@
             <div class="contact-info">
                 <b>Store Address:</b> #105 Palmera Street, Barangay Holy Spirit, Quezon City, NCR, 1127, Philippines<br>
                 <b>Phone:</b> <a href="tel:+639457813029">+63 945 781 3029</a><br>
-                <b>Email:</b> <a href="mailto:contact@edmaryevangelistastore.com">contact@edmaryevangelistastore.com</a><br>
-                <b>Website:</b> <a href="https://www.edmaryevangelistastore.com" target="_blank">www.edmaryevangelistastore.com</a><br>
+                <b>Email:</b> <a href="mailto:service@edmarydaily.site">service@edmarydaily.site</a><br>
+                <b>Website:</b> <a href="https://edmarydaily.site" target="_blank">edmarydaily.site</a><br>
                 <b>Business Hours:</b> Monday to Saturday – 8:00 AM to 6:00 PM<br>
                 Closed on Sundays<br>
                 <b>Facebook & Instagram:</b> @edmaryevangelistastore
@@ -769,11 +776,10 @@
             <b>Business Type:</b> Cosmetics & Beauty Products Retail<br>
             <b>Store Address:</b> #105 Palmera Street, Barangay Holy Spirit, Quezon City, NCR, 1127, Philippines<br>
             <b>Phone:</b> +63 945 781 3029<br>
-            <b>Email:</b> contact@edmaryevangelistastore.com<br>
-            <b>Website:</b> www.edmaryevangelistastore.com<br>
+            <b>Email:</b> service@edmarydaily.site<br>
+            <b>Website:</b> edmarydaily.site<br>
             <b>Operating Hours:</b> Monday to Saturday – 8:00 AM to 6:00 PM<br>
-            <b>Business Registration No.:</b> #QCY-234987654-BEAUTY<br>
-            <b>VAT Registered:</b> Yes – VAT ID #009123456789
+            <b>TIN:</b> 395-748-621-000
         </div>
         <div style="margin-top: 16px; font-size: 0.94rem;">
             &copy; 2025 Edmary Evangelista Daily Store. All rights reserved.
