@@ -112,3 +112,26 @@ footer { background: var(--plum-deep); color: #e9d9ef; border-radius: 2rem 2rem 
   .hero-text-panel { max-width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* === Layout pass 2026-11-07: full-width product cards with real photos, contact cards, mobile header === */
+html, body { overflow-x: clip; }
+.products-list { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+.product-card { width: auto !important; min-width: 0 !important; max-width: none !important; padding: 0 0 1.3rem !important; overflow: hidden; text-align: center; }
+.product-card > *:not(.product-image) { padding-left: 1.1rem; padding-right: 1.1rem; }
+.product-image { width: 100% !important; height: auto !important; aspect-ratio: 4 / 3; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; margin: 0 0 1rem !important; background: var(--lilac) !important; }
+.product-image img { width: 100% !important; height: 100% !important; object-fit: cover !important; padding: 0 !important; border-radius: 0 !important; }
+.product-card button, .product-card .add-to-cart { margin-top: auto !important; width: calc(100% - 2.2rem) !important; }
+.contact .contact-info { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin: 1.2rem 0 1rem; line-height: 1.6; }
+.contact-card { background: rgba(255,255,255,.07); border-left: 4px solid var(--gold); border-radius: 0 .9rem .9rem 0; padding: .9rem 1.1rem; overflow-wrap: anywhere; }
+.contact-card.wide { grid-column: 1 / -1; }
+.contact-card b { display: block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .15rem; }
+@media (max-width: 900px) { .contact .contact-info { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) {
+  .products-list { grid-template-columns: 1fr !important; }
+  .contact .contact-info { grid-template-columns: 1fr; }
+  header { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: #fff8f5 !important; }
+  .logo-box { justify-content: flex-start !important; padding-right: 56px; }
+  .logo-subcaption { display: none; }
+  .burger { top: 50% !important; transform: translateY(-50%); right: 12px !important; }
+}
+@media (min-width: 901px) { .contact-card:last-child { grid-column: span 2; } }
